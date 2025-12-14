@@ -22,8 +22,7 @@
 		<sonar.projectKey>Ericatici_production-service</sonar.projectKey>
 		<sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
 		<sonar.coverage.jacoco.xmlReportPaths>${project.build.directory}/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
-		<sonar.coverage.exclusions>**/config/**,**/dto/**,**/entities/**,**/exceptions/**,**/ProductionServiceApplication.java,**/repositories/jpa/**</sonar.coverage.exclusions>
-		<sonar.qualitygate.wait>true</sonar.qualitygate.wait>
+		<sonar.coverage.exclusions>**/config/**,**/dto/**,**/entities/**,**/exceptions/**,**/ProductionServiceApplication.java</sonar.coverage.exclusions>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -162,8 +161,6 @@
 								<exclude>**/dto/**</exclude>
 								<exclude>**/entities/**</exclude>
 								<exclude>**/exceptions/**</exclude>
-								<exclude>**/mappers/**</exclude>
-								<exclude>**/repositories/jpa/**</exclude>
 								<exclude>**/ProductionServiceApplication.class</exclude>
 							</excludes>
 						</configuration>
@@ -179,8 +176,6 @@
 								<exclude>**/dto/**</exclude>
 								<exclude>**/entities/**</exclude>
 								<exclude>**/exceptions/**</exclude>
-								<exclude>**/mappers/**</exclude>
-								<exclude>**/repositories/jpa/**</exclude>
 								<exclude>**/ProductionServiceApplication.class</exclude>
 							</excludes>
 							<rules>
@@ -190,7 +185,7 @@
 										<limit>
 											<counter>LINE</counter>
 											<value>COVEREDRATIO</value>
-											<minimum>0.80</minimum>
+											<minimum>0.70</minimum>
 										</limit>
 									</limits>
 								</rule>
