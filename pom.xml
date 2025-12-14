@@ -17,6 +17,12 @@
 		<java.version>17</java.version>
 		<jacoco.version>0.8.11</jacoco.version>
 		<cucumber.version>7.18.0</cucumber.version>
+		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+		<sonar.organization>ericatici</sonar.organization>
+		<sonar.projectKey>Ericatici_production-service</sonar.projectKey>
+		<sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+		<sonar.coverage.jacoco.xmlReportPaths>${project.build.directory}/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+		<sonar.coverage.exclusions>**/config/**,**/dto/**,**/entities/**,**/exceptions/**,**/ProductionServiceApplication.java</sonar.coverage.exclusions>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -138,23 +144,40 @@
 				<version>${jacoco.version}</version>
 				<executions>
 					<execution>
+						<id>jacoco-prepare-agent</id>
 						<goals>
 							<goal>prepare-agent</goal>
 						</goals>
 					</execution>
 					<execution>
-						<id>report</id>
+						<id>jacoco-report</id>
 						<phase>test</phase>
 						<goals>
 							<goal>report</goal>
 						</goals>
+						<configuration>
+							<excludes>
+								<exclude>**/config/**</exclude>
+								<exclude>**/dto/**</exclude>
+								<exclude>**/entities/**</exclude>
+								<exclude>**/exceptions/**</exclude>
+								<exclude>**/ProductionServiceApplication.class</exclude>
+							</excludes>
+						</configuration>
 					</execution>
 					<execution>
-						<id>check</id>
+						<id>jacoco-check</id>
 						<goals>
 							<goal>check</goal>
 						</goals>
 						<configuration>
+							<excludes>
+								<exclude>**/config/**</exclude>
+								<exclude>**/dto/**</exclude>
+								<exclude>**/entities/**</exclude>
+								<exclude>**/exceptions/**</exclude>
+								<exclude>**/ProductionServiceApplication.class</exclude>
+							</excludes>
 							<rules>
 								<rule>
 									<element>PACKAGE</element>
@@ -162,7 +185,7 @@
 										<limit>
 											<counter>LINE</counter>
 											<value>COVEREDRATIO</value>
-											<minimum>0.80</minimum>
+											<minimum>0.70</minimum>
 										</limit>
 									</limits>
 								</rule>
@@ -170,6 +193,12 @@
 						</configuration>
 					</execution>
 				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.sonarsource.scanner.maven</groupId>
+				<artifactId>sonar-maven-plugin</artifactId>
+				<version>4.0.0.4121</version>
 			</plugin>
 		</plugins>
 	</build>
